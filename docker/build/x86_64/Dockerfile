@@ -2,7 +2,7 @@
 # ie from top=level stash:
 # docker build -t stash-box/build -f docker/build/x86_64/Dockerfile .
 
-FROM golang:1.13.14 as compiler
+FROM golang:1.13.14@sha256:b39f2026ca9ead26fe724e81fba19554154c12a12f11d40d2e0df196d7b6875d as compiler
 
 RUN apt-get update && apt-get install -y apt-transport-https
 RUN curl -sL https://deb.nodesource.com/setup_10.x | bash -
@@ -31,7 +31,7 @@ RUN make generate
 RUN make ui 
 RUN make build
 
-FROM ubuntu:19.10 as app
+FROM ubuntu:19.10@sha256:f332c4057e21ec71cc8b20b05328d476104a069bfa6882877e0920e8140edcf0 as app
 
 RUN apt-get update && apt-get -y install ca-certificates
 COPY --from=compiler /stash-box/stash-box /usr/bin/
