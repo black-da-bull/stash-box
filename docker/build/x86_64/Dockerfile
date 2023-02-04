@@ -31,7 +31,7 @@ RUN make generate
 RUN make ui 
 RUN make build
 
-FROM ubuntu:19.10 as app
+FROM ubuntu:19.10@sha256:f332c4057e21ec71cc8b20b05328d476104a069bfa6882877e0920e8140edcf0 as app
 
 RUN apt-get update && apt-get -y install ca-certificates
 COPY --from=compiler /stash-box/stash-box /usr/bin/
